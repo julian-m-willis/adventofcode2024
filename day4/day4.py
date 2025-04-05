@@ -5,9 +5,21 @@ def main():
             matrix.append(line.strip())
             
         ans1 = day4_part1(matrix)
-        
+        ans2 = day4_part2(matrix)
+
     print(f"Part 1: {ans1}")
-    # print(f"Part 2: {ans2}")
+    print(f"Part 2: {ans2}")
+    
+def day4_part2(matrix):
+    pattern = {("M", "M", "S", "S"), ("S", "M", "M", "S"), ("M", "S", "S", "M"),("S", "S", "M", "M")}
+    ans = 0
+    for i in range(1, len(matrix)-1):
+        for j in range(1, len(matrix[0])-1):
+            if matrix[i][j] == "A":
+                my_tuple = (matrix[i-1][j-1], matrix[i-1][j+1], matrix[i+1][j+1], matrix[i+1][j-1])
+                if my_tuple in pattern:
+                    ans += 1
+    return ans
 
 def day4_part1(matrix):
     #go left to right and right to left
